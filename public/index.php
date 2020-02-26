@@ -1,193 +1,154 @@
-<?php
-require_once '../vendor/autoload.php';
+<!doctype html>
+<html lang="en">
 
-session_start();
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-$dotenv = Dotenv\Dotenv::createImmutable(__DIR__.'/..');
-$dotenv->load();
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css" integrity="sha384-Smlep5jCw/wG7hdkwQ/Z5nLIefveQRIY9nfy6xoR1uRYBtpZgI6339F5dgvm/e9B"
+          crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
 
-if(getenv('DEBUG')==='true'){
-    ini_set('display_errors',1);
-    ini_set('display_startup_errors',1);
-    error_reporting(E_ALL);
-}
+    <title>Resume</title>
+</head>
 
-use Illuminate\Database\Capsule\Manager as Capsule;
-use Aura\Router\RouterContainer;
-use Laminas\Diactoros\Response;
-use Monolog\Handler\StreamHandler;
-use Monolog\Logger;
-use WoohooLabs\Harmony\Harmony;
-use WoohooLabs\Harmony\Middleware\DispatcherMiddleware;
-use WoohooLabs\Harmony\Middleware\HttpHandlerRunnerMiddleware;
-use Zend\HttpHandlerRunner\Emitter\SapiEmitter;
+<body>
+<div class="container">
+    <div id="resume-header" class="row">
+        <div class="col-3">
+            <img id="profile-picture" src="https://ui-avatars.com/api/?name=John+Doe&size=255" alt="">
+        </div>
+        <div class="col">
+            <h1>Hector Benitez</h1>
+            <h2>PHP Developer</h2>
+            <ul>
+                <li>Mail: <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="cda5a8aeb9a2bf8da0aca4a1e3aea2a0">[email&#160;protected]</a></li>
+                <li>Phone: 1234567890</li>
+                <li>LinkedIn: https://linkedin.com</li>
+                <li>Twitter: @hectorbenitez</li>
+            </ul>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <h2 class="border-bottom-gray" >Carrer Summary</h2>
+            <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+            </p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <div>
+                <h3 class="border-bottom-gray" >Work Experience</h3>
+                <ul>
+                    <li class="work-position">
+                        <h5>PHP Developer</h5>
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi sapiente sed pariatur sint exercitationem eos expedita eveniet veniam ullam, quia neque facilis dicta voluptatibus. Eveniet doloremque ipsum itaque obcaecati nihil.</p>
+                        <strong>Achievements:</strong>
+                        <ul>
+                            <li>Lorem ipsum dolor sit amet, 80% consectetuer adipiscing elit.</li>
+                            <li>Lorem ipsum dolor sit amet, 80% consectetuer adipiscing elit.</li>
+                            <li>Lorem ipsum dolor sit amet, 80% consectetuer adipiscing elit.</li>
+                        </ul>
+                    </li>
+                    <li class="work-position">
+                        <h5>PHP Developer</h5>
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi sapiente sed pariatur sint exercitationem eos expedita eveniet veniam ullam, quia neque facilis dicta voluptatibus. Eveniet doloremque ipsum itaque obcaecati nihil.</p>
+                        <strong>Achievements:</strong>
+                        <ul>
+                            <li>Lorem ipsum dolor sit amet, 80% consectetuer adipiscing elit.</li>
+                            <li>Lorem ipsum dolor sit amet, 80% consectetuer adipiscing elit.</li>
+                            <li>Lorem ipsum dolor sit amet, 80% consectetuer adipiscing elit.</li>
+                        </ul>
+                    </li>
+                    <li class="work-position">
+                        <h5>PHP Developer</h5>
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi sapiente sed pariatur sint exercitationem eos expedita eveniet veniam ullam, quia neque facilis dicta voluptatibus. Eveniet doloremque ipsum itaque obcaecati nihil.</p>
+                        <strong>Achievements:</strong>
+                        <ul>
+                            <li>Lorem ipsum dolor sit amet, 80% consectetuer adipiscing elit.</li>
+                            <li>Lorem ipsum dolor sit amet, 80% consectetuer adipiscing elit.</li>
+                            <li>Lorem ipsum dolor sit amet, 80% consectetuer adipiscing elit.</li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            <div>
+                <h3 class="border-bottom-gray">Projects</h3>
+                <div class="project">
+                    <h5>Project X</h5>
+                    <div class="row">
+                        <div class="col-3">
+                            <img id="profile-picture" src="https://ui-avatars.com/api/?name=John+Doe&size=255" alt="">
+                        </div>
+                        <div class="col">
+                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eius earum corporis at accusamus quisquam hic quos vel? Tenetur, ullam veniam consequatur esse quod cum, quam cupiditate assumenda natus maiores aperiam.</p>
+                            <strong>Technologies used:</strong>
+                            <span class="badge badge-secondary">PHP</span>
+                            <span class="badge badge-secondary">HTML</span>
+                            <span class="badge badge-secondary">CSS</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="project">
+                    <h5>Project X</h5>
+                    <div class="row">
+                        <div class="col-3">
+                            <img id="profile-picture" src="https://ui-avatars.com/api/?name=John+Doe&size=255" alt="">
+                        </div>
+                        <div class="col">
+                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eius earum corporis at accusamus quisquam hic quos vel? Tenetur, ullam veniam consequatur esse quod cum, quam cupiditate assumenda natus maiores aperiam.</p>
+                            <strong>Technologies used:</strong>
+                            <span class="badge badge-secondary">PHP</span>
+                            <span class="badge badge-secondary">HTML</span>
+                            <span class="badge badge-secondary">CSS</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-3">
+            <h3 class="border-bottom-gray" >Skills & Tools</h3>
+            <h4>Backend</h4>
+            <ul>
+                <li>PHP</li>
+            </ul>
+            <h4>Frontend</h4>
+            <ul>
+                <li>HTML</li>
+                <li>CSS</li>
+            </ul>
+            <h4>Frameworks</h4>
+            <ul>
+                <li>Laravel</li>
+                <li>Bootstrap</li>
+            </ul>
+            <h3 class="border-bottom-gray" >Languages</h3>
+            <ul>
+                <li>Spanish</li>
+                <li>English</li>
+            </ul>
+        </div>
+    </div>
+    <div id="resume-footer" class="row">
+        <div class="col">
+            Designed by @hectorbenitez
+        </div>
+    </div>
+</div>
 
-// Crear archivo de LOG
-// create a log channel
-$log = new Logger('app');
-$log->pushHandler(new StreamHandler(__DIR__ . "\..\logs\app.log", Logger::WARNING));
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+                                                                                                                    crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/js/bootstrap.min.js" integrity="sha384-o+RDsa0aLu++PJvFqy8fFScvbHFLtbvScb8AjopnFD+iEQ7wo/CG0xlczd+2O/em"
+        crossorigin="anonymous"></script>
+</body>
 
-//Contenedor de Inyección de Dependencias
-$container = new DI\Container();
-
-//Conexion mediante ENV
-$capsule = new Capsule;
-$capsule->addConnection([
-    'driver'    => 'mysql',
-    'host'      => getenv('DB_HOST'),
-    'database'  => getenv('DB_NAME'),
-    'username'  => getenv('DB_USER'),
-    'password'  => getenv('DB_PASS'),
-    'charset'   => 'utf8',
-    'collation' => 'utf8_unicode_ci',
-    'prefix'    => '',
-]);
-// Make this Capsule instance available globally via static methods... (optional)
-$capsule->setAsGlobal();
-// Setup the Eloquent ORM... (optional; unless you've used setEventDispatcher())
-$capsule->bootEloquent();
-
-// Manejador para peticiones ( PSR7 )
-$request = Laminas\Diactoros\ServerRequestFactory::fromGlobals(
-    $_SERVER,
-    $_GET,
-    $_POST,
-    $_COOKIE,
-    $_FILES
-);
-
-// Manejador de Routeo ( PSR7 )
-$routerContainer = new RouterContainer();
-$map = $routerContainer->getMap();
-$map->get('index', '/', [
-    'App\Controllers\IndexController',
-    'indexAction'
-]);
-$map->get('indexJobs', '/jobs', [
-    'App\Controllers\JobsController',
-    'indexAction',
-]);
-$map->get('addJob', '/jobs/add', [
-    'App\Controllers\JobsController',
-    'getAddJobAction',
-]);
-$map->post('saveJob', '/jobs/add', [
-    'App\Controllers\JobsController',
-    'getAddJobAction'
-]);
-$map->get('deleteJobs', '/jobs/delete/{id}', [
-    'App\Controllers\JobsController',
-    'deleteAction'
-]);
-$map->get('indexProjects','/projects',[
-    'App\Controllers\ProjectsController',
-    'indexAction'
-]);
-$map->get('addProject','/projects/add', [
-    'App\Controllers\ProjectsController',
-    'getAddProjectAction',
-]);
-$map->post('saveProject','/projects/add',[
-    'App\Controllers\ProjectsController',
-    'getAddProjectAction'
-]);
-$map->get('deleteProjects','/projects/delete',[
-    'App\Controllers\ProjectsController',
-    'deleteAction'
-]);
-$map->get('addUser','/users/add',[
-    'App\Controllers\UsersController',
-    'getAddUserAction',
-]);
-$map->post('saveUser','/users/add',[
-    'App\Controllers\UsersController',
-    'getAddUserAction'
-]);
-$map->get('showPass','/users/pass',[
-    'App\Controllers\UsersController',
-    'getPassword'
-]);
-$map->post('change','/users/changepass',[
-    'App\Controllers\UsersController',
-    'changePassword'
-]);
-$map->get('loginForm','/login',[
-    'App\Controllers\AuthController',
-    'getLogin'
-]);
-$map->get('logout','/logout',[
-    'App\Controllers\AuthController',
-    'getLogout'
-]);
-$map->post('loginAuth','/auth',[
-    'App\Controllers\AuthController',
-    'postAuth'
-]);
-$map->get('admin','/admin',[
-    'App\Controllers\AdminController',
-    'getIndex',
-]);
-$map->get('contactForm','/contact',[
-    'App\Controllers\ContactController',
-    'index',
-]);
-$map->post('contactSend','/contact/send',[
-    'App\Controllers\ContactController',
-    'send'
-]);
-$matcher = $routerContainer->getMatcher();
-
-$route = $matcher->match($request);
-
-if(!$route) {
-
-     // ¿¿¿ Por qué no funciona lo siguiente ???
-     # $controllerBase = new \App\Controllers\BaseController();
-     # return $controllerBase->renderHTML('notFound.twig',['hola'=>"hi!"]);
-
-    echo $request->getUri()->getPath()."<br>";
-    echo 'No route';
-} else{
-    try {
-        #Los Middlewares son 'capas' que permiten abstraer las partes de la aplicación
-        #Checar funcionamiento del Middleware en Middleware -> DispatcherMiddleware -> process() [opc]
-        #Harmony nos permitirá trabajar con Middlewares
-        #SapiEmitter es un Middleware encargado de emitir la respuesta
-
-        $harmony = new Harmony($request, new Response());
-        $harmony->addMiddleware(new HttpHandlerRunnerMiddleware(new SapiEmitter()));
-            if(getenv('DEBUG')==='true'){
-                $harmony->addMiddleware(new \Franzl\Middleware\Whoops\WhoopsMiddleware());
-            }
-        $harmony->addMiddleware(new \App\Middlewares\AuthenticationMiddleware())
-                ->addMiddleware(new Middlewares\AuraRouter($routerContainer))
-                ->addMiddleware(new DispatcherMiddleware($container, 'request-handler'))
-                ->run();
-    } catch (Exception $e){
-        $log->warning($e->getMessage());
-        $emitter = new SapiEmitter();
-        $emitter->emit(new Response\EmptyResponse(400));
-    } catch (Error $e){
-        $emitter = new SapiEmitter();
-        $emitter->emit(new Response\EmptyResponse(500));
-    }
-
-    #Antes de implementar Harmony
-    /*$handlerData = $route->handler;
-    $controllerName = $handlerData['controller'];
-    $actionName = $handlerData['action'];
-    $needsAuth = $handlerData['auth'] ?? false;
-    $pathAux = $request->getUri()->getPath();
-    $controller = $container->get($controllerName);
-    $response = $controller->$actionName($request);
-
-    foreach ($response->getHeaders() as $name => $values)
-    {
-        foreach ($values as $value){
-            //echo $name." : ".$value."-><br>";
-            header(sprintf('%s: %s',$name,$value),false);
-        }
-    }
-    http_response_code($response->getStatusCode());
-    echo $response->getBody();*/
-}
+</html>
