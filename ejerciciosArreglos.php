@@ -28,8 +28,8 @@
         "España" => ["Barcelona","Madrid","Sevilla"],
     ];
     foreach ($arreglo2 as $keyA2 => $element2){
-        echo $keyA2.": ";
-        foreach ($element2 as $cd) echo $cd." ";
+        $ciudades = implode(" ",$element2);
+        echo $keyA2.": ".$ciudades;
         echo "<br>";
     }
 

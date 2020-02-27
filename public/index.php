@@ -1,3 +1,21 @@
+<?php
+    $lastName = 'QL';
+    $name = "Yerman $lastName";
+    $jobs = [
+        [
+            'title' => 'PHP Developer',
+            'description' => 'This is a new Job!',
+        ],
+        [
+            'title' => 'Front Developer',
+            'description' => 'This is a good Job!',
+        ],
+        [
+            'title' => 'Full Stack Developer',
+            'description' => 'This is a old Job!',
+        ],
+    ];
+?>
 <!doctype html>
 <html lang="en">
 
@@ -21,7 +39,7 @@
             <img id="profile-picture" src="https://ui-avatars.com/api/?name=John+Doe&size=255" alt="">
         </div>
         <div class="col">
-            <h1>Hector Benitez</h1>
+            <h1><?=$name;?></h1>
             <h2>PHP Developer</h2>
             <ul>
                 <li>Mail: <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="cda5a8aeb9a2bf8da0aca4a1e3aea2a0">[email&#160;protected]</a></li>
@@ -45,36 +63,20 @@
             <div>
                 <h3 class="border-bottom-gray" >Work Experience</h3>
                 <ul>
-                    <li class="work-position">
-                        <h5>PHP Developer</h5>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi sapiente sed pariatur sint exercitationem eos expedita eveniet veniam ullam, quia neque facilis dicta voluptatibus. Eveniet doloremque ipsum itaque obcaecati nihil.</p>
-                        <strong>Achievements:</strong>
-                        <ul>
-                            <li>Lorem ipsum dolor sit amet, 80% consectetuer adipiscing elit.</li>
-                            <li>Lorem ipsum dolor sit amet, 80% consectetuer adipiscing elit.</li>
-                            <li>Lorem ipsum dolor sit amet, 80% consectetuer adipiscing elit.</li>
-                        </ul>
-                    </li>
-                    <li class="work-position">
-                        <h5>PHP Developer</h5>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi sapiente sed pariatur sint exercitationem eos expedita eveniet veniam ullam, quia neque facilis dicta voluptatibus. Eveniet doloremque ipsum itaque obcaecati nihil.</p>
-                        <strong>Achievements:</strong>
-                        <ul>
-                            <li>Lorem ipsum dolor sit amet, 80% consectetuer adipiscing elit.</li>
-                            <li>Lorem ipsum dolor sit amet, 80% consectetuer adipiscing elit.</li>
-                            <li>Lorem ipsum dolor sit amet, 80% consectetuer adipiscing elit.</li>
-                        </ul>
-                    </li>
-                    <li class="work-position">
-                        <h5>PHP Developer</h5>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi sapiente sed pariatur sint exercitationem eos expedita eveniet veniam ullam, quia neque facilis dicta voluptatibus. Eveniet doloremque ipsum itaque obcaecati nihil.</p>
-                        <strong>Achievements:</strong>
-                        <ul>
-                            <li>Lorem ipsum dolor sit amet, 80% consectetuer adipiscing elit.</li>
-                            <li>Lorem ipsum dolor sit amet, 80% consectetuer adipiscing elit.</li>
-                            <li>Lorem ipsum dolor sit amet, 80% consectetuer adipiscing elit.</li>
-                        </ul>
-                    </li>
+                    <?php
+                        foreach ($jobs as $job){
+                            echo '<li class="work-position">
+                                <h5>'.$job['title'].'</h5>
+                                <p>'.$job['description'].'</p>
+                                <strong>Achievements:</strong>
+                                <ul>
+                                    <li>Lorem ipsum dolor sit amet, 80% consectetuer adipiscing elit.</li>
+                                    <li>Lorem ipsum dolor sit amet, 80% consectetuer adipiscing elit.</li>
+                                    <li>Lorem ipsum dolor sit amet, 80% consectetuer adipiscing elit.</li>
+                                </ul>
+                              </li>';
+                        }
+                    ?>
                 </ul>
             </div>
             <div>
