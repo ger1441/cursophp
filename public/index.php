@@ -1,18 +1,37 @@
 <?php
     $lastName = 'QL';
     $name = "Yerman $lastName";
+    $limitMonths = 12;
     $jobs = [
         [
             'title' => 'PHP Developer',
             'description' => 'This is a new Job!',
+            'visible' => true,
+            'months' => 6,
         ],
         [
             'title' => 'Front Developer',
             'description' => 'This is a good Job!',
+            'visible' => false,
+            'months' => 5,
         ],
         [
             'title' => 'Full Stack Developer',
             'description' => 'This is a old Job!',
+            'visible' => true,
+            'months' => 5,
+        ],
+        [
+            'title' => 'NodeJs Developer',
+            'description' => 'This is a old Job!',
+            'visible' => true,
+            'months' => 2,
+        ],
+        [
+            'title' => 'Angular Developer',
+            'description' => 'This is a old Job!',
+            'visible' => true,
+            'months' => 3,
         ],
     ];
 ?>
@@ -64,10 +83,19 @@
                 <h3 class="border-bottom-gray" >Work Experience</h3>
                 <ul>
                     <?php
+                        $totalMonths = 0;
                         foreach ($jobs as $job){
+
+                            if(!$job['visible']) continue;
+
+                            if($totalMonths > $limitMonths) break;
+                            $totalMonths += $job['months'];
+
+
                             echo '<li class="work-position">
                                 <h5>'.$job['title'].'</h5>
                                 <p>'.$job['description'].'</p>
+                                <p>'.$job['months'].'</p>
                                 <strong>Achievements:</strong>
                                 <ul>
                                     <li>Lorem ipsum dolor sit amet, 80% consectetuer adipiscing elit.</li>
