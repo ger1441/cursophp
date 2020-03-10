@@ -1,13 +1,7 @@
 <?php
+require_once "BaseElement.php";
 
-namespace App\Models;
-use App\Traits\DurationAsString;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
-
-class Project extends Model
+class Project extends BaseElement
 {
-    use SoftDeletes;
-    use DurationAsString;
-    protected $table = 'projects';
+
 }

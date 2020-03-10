@@ -1,14 +1,20 @@
 <?php
+require_once "BaseElement.php";
 
-namespace App\Models;
-use App\Traits\{HasDefaultImage,DurationAsString};
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Job extends Model
+class Job extends BaseElement
 {
-    use SoftDeletes;
-    use HasDefaultImage;
-    use DurationAsString;
-    protected $table = 'jobs';
+
+    public function __construct($title, $description)
+    {
+        $newTitle = 'Job: '.$title;
+        //$this->title = $newTitle;
+        parent::__construct($newTitle, $description);
+    }
+
+    public function getDurationAsString() {
+        $years  = floor($this->months / 12 ) > 0 ? floor($this->months / 12 ) . " years": "";
+        $extraM = $this->months % 12 > 0 ? $this->months % 12 . " months" : "";
+        return "Job duration: $years $extraM";
+    }
 }

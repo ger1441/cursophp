@@ -1,39 +1,11 @@
 <?php
+
+    require_once "../jobs.php";
+
     $lastName = 'QL';
     $name = "Yerman $lastName";
-    $limitMonths = 12;
-    $jobs = [
-        [
-            'title' => 'PHP Developer',
-            'description' => 'This is a new Job!',
-            'visible' => true,
-            'months' => 6,
-        ],
-        [
-            'title' => 'Front Developer',
-            'description' => 'This is a good Job!',
-            'visible' => false,
-            'months' => 5,
-        ],
-        [
-            'title' => 'Full Stack Developer',
-            'description' => 'This is a old Job!',
-            'visible' => true,
-            'months' => 5,
-        ],
-        [
-            'title' => 'NodeJs Developer',
-            'description' => 'This is a old Job!',
-            'visible' => true,
-            'months' => 2,
-        ],
-        [
-            'title' => 'Angular Developer',
-            'description' => 'This is a old Job!',
-            'visible' => true,
-            'months' => 3,
-        ],
-    ];
+    $limitMonths = 2000;
+
 ?>
 <!doctype html>
 <html lang="en">
@@ -86,30 +58,25 @@
                         $totalMonths = 0;
                         foreach ($jobs as $job){
 
-                            if(!$job['visible']) continue;
-
                             if($totalMonths > $limitMonths) break;
-                            $totalMonths += $job['months'];
+                            $totalMonths += $job->months;
 
-
-                            echo '<li class="work-position">
-                                <h5>'.$job['title'].'</h5>
-                                <p>'.$job['description'].'</p>
-                                <p>'.$job['months'].'</p>
-                                <strong>Achievements:</strong>
-                                <ul>
-                                    <li>Lorem ipsum dolor sit amet, 80% consectetuer adipiscing elit.</li>
-                                    <li>Lorem ipsum dolor sit amet, 80% consectetuer adipiscing elit.</li>
-                                    <li>Lorem ipsum dolor sit amet, 80% consectetuer adipiscing elit.</li>
-                                </ul>
-                              </li>';
+                            printElement($job);
                         }
                     ?>
                 </ul>
             </div>
             <div>
                 <h3 class="border-bottom-gray">Projects</h3>
-                <div class="project">
+                <ul>
+                    <?php
+                    foreach ($projects as $project){
+                        printElement($project);
+                    }
+                    ?>
+                </ul>
+
+                <!--<div class="project">
                     <h5>Project X</h5>
                     <div class="row">
                         <div class="col-3">
@@ -138,7 +105,7 @@
                             <span class="badge badge-secondary">CSS</span>
                         </div>
                     </div>
-                </div>
+                </div>-->
             </div>
         </div>
         <div class="col-3">
