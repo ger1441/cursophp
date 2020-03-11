@@ -2,7 +2,15 @@
 
 namespace App\Models;
 
-class Project extends BaseElement
-{
+use Illuminate\Database\Eloquent\Model;
 
+class Project extends Model
+{
+    protected $table = 'projects';
+
+    public function getDurationAsString() {
+        $years  = floor($this->months / 12 ) > 0 ? floor($this->months / 12 ) . " years": "";
+        $extraM = $this->months % 12 > 0 ? $this->months % 12 . " months" : "";
+        return "Project duration: $years $extraM";
+    }
 }
