@@ -1,3 +1,6 @@
+<?php
+
+?>
 <!doctype html>
 <html lang="es">
 <head>
@@ -14,11 +17,12 @@
 </head>
 <body>
     <h1>Add Job</h1>
-    <form action="">
+    <form action="addJob.php" method="post">
         <label for="">Title:</label>
-        <input type="text"><br>
+        <input type="text" name="title"><br>
         <label for="">Description:</label>
-        <input type="text">
+        <input type="text" name="description"><br>
+        <button type="submit">Save</button>
     </form>
 </body>
 </html>
