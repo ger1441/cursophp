@@ -1,4 +1,7 @@
 <?php
+
+namespace App\Models;
+
 require_once "BaseElement.php";
 
 

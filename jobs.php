@@ -3,6 +3,8 @@
 require_once "app/Models/Job.php";
 require_once "app/Models/Project.php";
 
+use App\Models\{Job,Project,Printable};
+
 $job1 = new Job('PHP Developer','This is a new Job!');
 $job1->months = 16;
 
