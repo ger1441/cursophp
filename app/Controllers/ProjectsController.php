@@ -13,6 +13,6 @@ class ProjectsController extends BaseController
             $project->description = $postData['description'];
             $project->save();
         }
-        echo $this->renderHTML('addProject.twig');
+        return $this->renderHTML('addProject.twig');
     }
 }
