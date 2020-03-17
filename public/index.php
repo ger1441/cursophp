@@ -44,6 +44,8 @@ $map->get('index','/',[
     'controller' => 'App\Controllers\IndexController',
     'action' => 'indexAction'
 ]);
+
+/** JOBS */
 $map->get('addJobs','/jobs/add',[
     'controller' => 'App\Controllers\JobsController',
     'action' => 'getAddJobAction'
@@ -51,6 +53,16 @@ $map->get('addJobs','/jobs/add',[
 $map->post('saveJobs','/jobs/add',[
     'controller' => 'App\Controllers\JobsController',
     'action' => 'getAddJobAction'
+]);
+
+/** PROYECTOS */
+$map->get('addProjects','/projects/add',[
+   'controller' => 'App\Controllers\ProjectsController',
+    'action' => 'getAddProjectAction'
+]);
+$map->post('saveProjects','/projects/add',[
+    'controller' => 'App\Controllers\ProjectsController',
+    'action' => 'getAddProjectAction'
 ]);
 
 $matcher = $routerContainer->getMatcher();
