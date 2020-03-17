@@ -2,8 +2,19 @@
 
 namespace App\Controllers;
 
-class IndexController {
+use App\Models\{Job,Project};
+
+class IndexController
+{
     public function indexAction(){
-        require_once '../index.php';
+
+        $jobs = Job::all();
+        $projects = Project::all();
+
+        $name = "Yerman QL";
+        $limitMonths = 2000;
+
+        include "../views/index.php";
+
     }
 }

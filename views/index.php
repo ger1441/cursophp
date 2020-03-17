@@ -1,9 +1,3 @@
-<?php
-require_once "jobs.php";
-$lastName = 'QL';
-$name = "Yerman $lastName";
-$limitMonths = 2000;
-?>
 <!doctype html>
 <html lang="en">
 
@@ -15,7 +9,7 @@ $limitMonths = 2000;
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css" integrity="sha384-Smlep5jCw/wG7hdkwQ/Z5nLIefveQRIY9nfy6xoR1uRYBtpZgI6339F5dgvm/e9B"
           crossorigin="anonymous">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="../public/style.css">
 
     <title>Resume</title>
 </head>
