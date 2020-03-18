@@ -4,11 +4,12 @@
         <div class="alert alert-{{ classMessage }}">{{ responseMessage }}</div>
     {% endif %}
     <h1>Add Project</h1>
-    <form action="/projects/add" method="post">
+    <form action="/projects/add" method="post" enctype="multipart/form-data">
         <label for="">Title:</label>
         <input type="text" name="title"><br>
         <label for="">Description:</label>
         <input type="text" name="description"><br>
+        <input type="file" name="logo"><br>
         <button type="submit">Save</button>
     </form>
 {% endblock %}

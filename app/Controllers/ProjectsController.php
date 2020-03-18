@@ -15,11 +15,22 @@ class ProjectsController extends BaseController
                 ->key('description',Validator::stringType()->notEmpty());
             try {
                 $projectValidator->assert($postData);
+
+                $files = $request->getUploadedFiles();
+                $logo = $files['logo'];
+                $fileName = "";
+
+                if($logo->getError() == UPLOAD_ERR_OK){
+                    $fileName = $logo->getClientFilename();
+                    $logo->moveTo("uploads/$fileName");
+                }
+
                 $project = new Project;
                 $project->title = $postData['title'];
                 $project->description = $postData['description'];
+                $project->logo = $fileName;
                 $project->save();
-                $responseMessage = "Job Save success";
+                $responseMessage = "Project Save success";
                 $classMessage = "success";
             }catch(\Exception $e){
                 $responseMessage = $e->getMessage();
