@@ -1,5 +1,8 @@
 {% extends 'layout.twig' %}
 {% block content %}
+    {% if(responseMessage!="") %}
+        <div class="alert alert-{{ classMessage }}">{{ responseMessage }}</div>
+    {% endif %}
     <h1>Add Job</h1>
     <form action="/jobs/add" method="post">
         <label for="">Title:</label>
