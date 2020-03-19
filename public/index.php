@@ -45,6 +45,16 @@ $map->get('index','/',[
     'action' => 'indexAction'
 ]);
 
+/** AUTH */
+$map->get('loginForm','/login',[
+    'controller' => 'App\Controllers\AuthController',
+    'action' => 'getLogin'
+]);
+$map->post('authForm','/auth',[
+    'controller' => 'App\Controllers\AuthController',
+    'action' => 'postLogin'
+]);
+
 /** USERS */
 $map->get('addUsers','/users/add',[
     'controller' => 'App\Controllers\UsersController',
