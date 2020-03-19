@@ -45,6 +45,16 @@ $map->get('index','/',[
     'action' => 'indexAction'
 ]);
 
+/** USERS */
+$map->get('addUsers','/users/add',[
+    'controller' => 'App\Controllers\UsersController',
+    'action' => 'getAddUserAction'
+]);
+$map->post('saveUsers','/users/add',[
+    'controller' => 'App\Controllers\UsersController',
+    'action' => 'getAddUserAction'
+]);
+
 /** JOBS */
 $map->get('addJobs','/jobs/add',[
     'controller' => 'App\Controllers\JobsController',
@@ -55,7 +65,7 @@ $map->post('saveJobs','/jobs/add',[
     'action' => 'getAddJobAction'
 ]);
 
-/** PROYECTOS */
+/** PROJECTS */
 $map->get('addProjects','/projects/add',[
    'controller' => 'App\Controllers\ProjectsController',
     'action' => 'getAddProjectAction'
