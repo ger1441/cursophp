@@ -1,4 +1,5 @@
 <?php
+session_start();
 
 ini_set('display_errors',1);
 ini_set('display_startup_errors',1);
@@ -54,11 +55,24 @@ $map->post('authForm','/auth',[
     'controller' => 'App\Controllers\AuthController',
     'action' => 'postLogin'
 ]);
+$map->get('logout','/logout',[
+    'controller' => 'App\Controllers\AuthController',
+    'action' => 'getLogout'
+]);
+
+/** ADMIN */
+$map->get('admin','/admin',[
+    'controller' => 'App\Controllers\AdminController',
+    'action' => 'getIndex',
+    'auth' => true,
+]);
+
 
 /** USERS */
 $map->get('addUsers','/users/add',[
     'controller' => 'App\Controllers\UsersController',
-    'action' => 'getAddUserAction'
+    'action' => 'getAddUserAction',
+    'auth' => true,
 ]);
 $map->post('saveUsers','/users/add',[
     'controller' => 'App\Controllers\UsersController',
@@ -68,7 +82,8 @@ $map->post('saveUsers','/users/add',[
 /** JOBS */
 $map->get('addJobs','/jobs/add',[
     'controller' => 'App\Controllers\JobsController',
-    'action' => 'getAddJobAction'
+    'action' => 'getAddJobAction',
+    'auth' => true,
 ]);
 $map->post('saveJobs','/jobs/add',[
     'controller' => 'App\Controllers\JobsController',
@@ -78,7 +93,8 @@ $map->post('saveJobs','/jobs/add',[
 /** PROJECTS */
 $map->get('addProjects','/projects/add',[
    'controller' => 'App\Controllers\ProjectsController',
-    'action' => 'getAddProjectAction'
+    'action' => 'getAddProjectAction',
+    'auth' => true,
 ]);
 $map->post('saveProjects','/projects/add',[
     'controller' => 'App\Controllers\ProjectsController',
@@ -94,6 +110,18 @@ if(!$route){
     $handlerData = $route->handler;
     $controllerName = $handlerData['controller'];
     $actionName = $handlerData['action'];
+    $needsAuth = $handlerData['auth'] ?? false;
+
+    $sessionUserId = $_SESSION['userId'] ?? null;
+    if($needsAuth && !$sessionUserId){
+        $controllerName = 'App\Controllers\AuthController';
+        $actionName = 'getLogout';
+    }else{
+        if($actionName == 'getLogin' && $sessionUserId){
+            $controllerName = 'App\Controllers\AdminController';
+            $actionName = 'getAdmin';
+        }
+    }
 
     $controller = new $controllerName;
     $response = $controller->$actionName($request);
