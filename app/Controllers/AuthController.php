@@ -3,6 +3,7 @@ namespace App\Controllers;
 
 use App\Models\User;
 use Respect\Validation\Validator;
+use Laminas\Diactoros\Response\RedirectResponse;
 
 class AuthController extends BaseController
 {
@@ -22,10 +23,13 @@ class AuthController extends BaseController
             $user = User::where('email',$postData['email'])->first();
             if($user){
                 if(password_verify($postData['password'],$user->password)){
-                    $responseMessage = "Encontrado";
-                }else $responseMessage = "NO Encontrado";
+                    return new RedirectResponse("/admin");
+                }else{
+                    $responseMessage = "Bad Credentials";
+                    $classMessage = "info";
+                }
             }else{
-                $responseMessage = "Verifique su información";
+                $responseMessage = "Bad Credentials";
                 $classMessage = "info";
             }
         }catch (\Exception $e){
@@ -33,6 +37,9 @@ class AuthController extends BaseController
             $classMessage = "info";
         }
 
-        echo $responseMessage;
+        return $this->renderHTML('login.twig',[
+            'responseMessage' => $responseMessage,
+            'classMessage' => $classMessage
+        ]);
     }
 }
