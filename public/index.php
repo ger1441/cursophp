@@ -7,6 +7,9 @@ error_reporting(E_ALL);
 
 require_once "../vendor/autoload.php";
 
+$dotenv = Dotenv\Dotenv::createImmutable(__DIR__.'/../');
+$dotenv->load();
+
 use Aura\Router\RouterContainer;
 use Illuminate\Database\Capsule\Manager as Capsule;
 
@@ -14,10 +17,10 @@ $capsule = new Capsule;
 
 $capsule->addConnection([
     'driver'    => 'mysql',
-    'host'      => '192.168.10.10',
-    'database'  => 'cursophp',
-    'username'  => 'homestead',
-    'password'  => 'secret',
+    'host'      => getenv('DB_HOST'),
+    'database'  => getenv('DB_NAME'),
+    'username'  => getenv('DB_USER'),
+    'password'  => getenv('DB_PASS'),
     'charset'   => 'utf8',
     'collation' => 'utf8_unicode_ci',
     'prefix'    => '',
