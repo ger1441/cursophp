@@ -7,8 +7,6 @@ error_reporting(E_ALL);
 
 require_once "../vendor/autoload.php";
 
-echo "Avanzado";
-
 $dotenv = Dotenv\Dotenv::createImmutable(__DIR__.'/../');
 $dotenv->load();
 
