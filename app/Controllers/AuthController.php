@@ -2,6 +2,7 @@
 namespace App\Controllers;
 
 use App\Models\User;
+use Laminas\Diactoros\ServerRequest;
 use Respect\Validation\Validator;
 use Laminas\Diactoros\Response\RedirectResponse;
 
@@ -11,11 +12,12 @@ class AuthController extends BaseController
         return $this->renderHTML('login.twig');
     }
 
-    public function postLogin($request){
+    public function postLogin(ServerRequest $request){
         $responseMessage = "";
         $classMessage = "";
 
         $postData = $request->getParsedBody();
+
         $userValidate = Validator::key('email',Validator::email())
                                  ->key('password',Validator::stringType()->notEmpty());
         try {

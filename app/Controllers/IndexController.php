@@ -14,7 +14,7 @@ class IndexController extends BaseController
         $jobs = Job::all();
         $projects = Project::all();
 
-        $filterFunction = function($job) use ($limitMonths){
+        $filterFunction = function(array $job) use ($limitMonths){
             return $job['months'] >= $limitMonths;
         };
 
