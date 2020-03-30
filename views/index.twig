@@ -28,17 +28,19 @@
         <div class="col">
             <div>
                 <h3 class="border-bottom-gray" >Work Experience</h3>
-                <ul>
-                    {% for job in jobs %}
-                        <li class="work-position">
+                {% for job in jobs %}
+                    <div class="row work-position">
+                        <div class="col-3">
+                            {% if(job.logo != "") %}
+                                <img src="uploads/{{ job.logo }}" alt="Job logo" class="img-fluid">
+                            {% endif %}
+                        </div>
+                        <div class="col">
                             <h5>{{ job.title }}</h5>
                             <p>{{ job.description }}</p>
-                            {% if(job.logo != "") %}
-                            <img src="uploads/{{ job.logo }}" alt="Job logo">
-                            {% endif %}
-                        </li>
-                    {% endfor  %}
-                </ul>
+                        </div>
+                    </div>
+                {% endfor  %}
             </div>
             <div>
                 <h3 class="border-bottom-gray">Projects</h3>
