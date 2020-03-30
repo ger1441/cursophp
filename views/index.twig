@@ -31,9 +31,7 @@
                 {% for job in jobs %}
                     <div class="row work-position">
                         <div class="col-3">
-                            {% if(job.logo != "") %}
-                                <img src="uploads/{{ job.logo }}" alt="Job logo" class="img-fluid">
-                            {% endif %}
+                            <img src="{{ job.getImage(job.title) }}" alt="Job logo" class="img-fluid">
                         </div>
                         <div class="col">
                             <h5>{{ job.title }}</h5>
@@ -49,9 +47,7 @@
                         <li class="work-position">
                             <h5>{{ project.title }}</h5>
                             <p>{{ project.description }}</p>
-                            {% if(project.logo != "") %}
-                            <img src="uploads/{{ project.logo }}" alt="Project logo">
-                            {% endif %}
+                            <img src="{{ project.getImage(project.title) }}" alt="Project logo">
                         </li>
                     {% endfor %}
                 </ul>
