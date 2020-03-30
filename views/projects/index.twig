@@ -1,0 +1,18 @@
+{% extends 'layout.twig' %}
+{% block content %}
+    <div class="row">
+        <h1>Projects</h1>
+        <table class="table">
+            <tr>
+                <th>Project</th>
+                <th>Delete</th>
+            </tr>
+            {% for project in projects %}
+            <tr>
+                <td>{{ project.title }}</td>
+                <td><a href="/projects/delete?id={{ project.id }}">Delete</a></td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+{% endblock %}

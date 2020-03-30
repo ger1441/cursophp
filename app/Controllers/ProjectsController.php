@@ -2,10 +2,18 @@
 namespace App\Controllers;
 
 use App\Models\Project;
+use Laminas\Diactoros\Response\RedirectResponse;
 use Respect\Validation\Validator;
+use Laminas\Diactoros\ServerRequest;
 
 class ProjectsController extends BaseController
 {
+    public function indexAction(){
+        $projects = Project::all();
+        $titlePage = 'Projects';
+        return $this->renderHTML('projects/index.twig',compact('projects','titlePage'));
+    }
+
     public function getAddProjectAction($request){
         $responseMessage = "";
         $classMessage = "";
@@ -40,6 +48,15 @@ class ProjectsController extends BaseController
         return $this->renderHTML('addProject.twig',[
             'responseMessage' => $responseMessage,
             'classMessage' => $classMessage,
+            'titlePage' => 'Add Project',
         ]);
+    }
+
+    public function deleteAction(ServerRequest $request){
+        $params = $request->getQueryParams();
+        $project = Project::find($params['id']);
+        $project->delete();
+
+        return new RedirectResponse('/projects');
     }
 }

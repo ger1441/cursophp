@@ -9,7 +9,7 @@ use Laminas\Diactoros\Response\RedirectResponse;
 class AuthController extends BaseController
 {
     public function getLogin(){
-        return $this->renderHTML('login.twig');
+        return $this->renderHTML('login.twig',['titlePage'=>'Login']);
     }
 
     public function postLogin(ServerRequest $request){

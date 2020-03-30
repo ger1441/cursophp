@@ -1,10 +1,18 @@
 <?php
 namespace App\Controllers;
 use App\Models\Job;
+use Laminas\Diactoros\Response\RedirectResponse;
 use Respect\Validation\Validator;
+use Laminas\Diactoros\ServerRequest;
 
 class JobsController extends BaseController
 {
+    public function indexAction(){
+        $jobs = Job::all();
+        $titlePage = "Jobs";
+        return $this->renderHTML('jobs/index.twig', compact('jobs','titlePage'));
+    }
+
     public function getAddJobAction($request){
         $responseMessage = "";
         $classMessage = "";
@@ -42,7 +50,17 @@ class JobsController extends BaseController
 
         return $this->renderHTML('addJob.twig',[
             'responseMessage'=>$responseMessage,
-            'classMessage'=>$classMessage
+            'classMessage'=>$classMessage,
+            'titlePage' => 'Add Job'
         ]);
     }
+
+    public function deleteAction(ServerRequest $request){
+        $params = $request->getQueryParams();
+        $job = Job::find($params['id']);
+        $job->delete();
+
+        return new RedirectResponse('/jobs');
+    }
+
 }

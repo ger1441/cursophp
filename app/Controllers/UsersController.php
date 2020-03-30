@@ -30,6 +30,7 @@ class UsersController extends BaseController
         return $this->renderHTML('addUser.twig',[
             'responseMessage' => $responseMessage,
             'classMessage' => $classMessage,
+            'titlePage' => 'Add User',
         ]);
     }
 }

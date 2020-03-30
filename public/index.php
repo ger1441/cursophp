@@ -92,6 +92,16 @@ $map->post('saveJobs','/jobs/add',[
     'controller' => 'App\Controllers\JobsController',
     'action' => 'getAddJobAction'
 ]);
+$map->get('indexJobs','/jobs',[
+   'controller' => 'App\Controllers\JobsController',
+   'action' => 'indexAction',
+   'auth' => true,
+]);
+$map->get('deleteJobs','/jobs/delete',[
+    'controller' => 'App\Controllers\JobsController',
+    'action' => 'deleteAction',
+    'auth' => true,
+]);
 
 /** PROJECTS */
 $map->get('addProjects','/projects/add',[
@@ -102,6 +112,16 @@ $map->get('addProjects','/projects/add',[
 $map->post('saveProjects','/projects/add',[
     'controller' => 'App\Controllers\ProjectsController',
     'action' => 'getAddProjectAction'
+]);
+$map->get('indexProjects','/projects',[
+    'controller' => 'App\Controllers\ProjectsController',
+    'action' => 'indexAction',
+    'auth' => true,
+]);
+$map->get('deleteProjects','/projects/delete',[
+    'controller' => 'App\Controllers\ProjectsController',
+    'action' => 'deleteAction',
+    'auth' => true,
 ]);
 
 $matcher = $routerContainer->getMatcher();
