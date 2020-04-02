@@ -9,7 +9,7 @@ use Laminas\Diactoros\ServerRequest;
 class ProjectsController extends BaseController
 {
     public function indexAction(){
-        $projects = Project::all();
+        $projects = Project::withTrashed()->get();
         $titlePage = 'Projects';
         return $this->renderHTML('projects/index.twig',compact('projects','titlePage'));
     }
