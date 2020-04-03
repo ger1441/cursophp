@@ -2,12 +2,20 @@
 namespace App\Controllers;
 
 use App\Models\Project;
+use App\Services\DeleteService;
 use Laminas\Diactoros\Response\RedirectResponse;
 use Respect\Validation\Validator;
 use Laminas\Diactoros\ServerRequest;
 
 class ProjectsController extends BaseController
 {
+    private $objService;
+
+    public function __construct(DeleteService $objService){
+        parent::__construct();
+        $this->objService = $objService;
+    }
+
     public function indexAction(){
         $projects = Project::withTrashed()->get();
         $titlePage = 'Projects';
@@ -54,8 +62,7 @@ class ProjectsController extends BaseController
 
     public function deleteAction(ServerRequest $request){
         $params = $request->getQueryParams();
-        $project = Project::find($params['id']);
-        $project->delete();
+        $this->objService->deleteElement($params['id'],Project::class);
 
         return new RedirectResponse('/projects');
     }

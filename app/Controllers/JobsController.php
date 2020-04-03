@@ -1,12 +1,20 @@
 <?php
 namespace App\Controllers;
 use App\Models\Job;
+use App\Services\DeleteService;
 use Laminas\Diactoros\Response\RedirectResponse;
 use Respect\Validation\Validator;
 use Laminas\Diactoros\ServerRequest;
 
 class JobsController extends BaseController
 {
+    private $objService;
+
+    public function __construct(DeleteService $objService){
+        parent::__construct();
+        $this->objService = $objService;
+    }
+
     public function indexAction(){
         $jobs = Job::withTrashed()->get();
         $titlePage = "Jobs";
@@ -57,8 +65,7 @@ class JobsController extends BaseController
 
     public function deleteAction(ServerRequest $request){
         $params = $request->getQueryParams();
-        $job = Job::find($params['id']);
-        $job->delete();
+        $this->objService->deleteElement($params['id'],Job::class);
 
         return new RedirectResponse('/jobs');
     }

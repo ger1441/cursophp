@@ -13,6 +13,7 @@ $dotenv->load();
 use Aura\Router\RouterContainer;
 use Illuminate\Database\Capsule\Manager as Capsule;
 
+$container = new DI\Container(); //Inyector de Dependencias.
 $capsule = new Capsule;
 
 $capsule->addConnection([
@@ -146,7 +147,9 @@ if(!$route){
         }
     }
 
-    $controller = new $controllerName;
+
+    //$controller = new $controllerName;
+    $controller = $container->get($controllerName);
     $response = $controller->$actionName($request);
 
     foreach ($response->getHeaders() as $name => $values){
@@ -156,21 +159,5 @@ if(!$route){
     }
     http_response_code($response->getStatusCode());
     echo $response->getBody();
-}
-
-function printElement($element) {
-    //if(!$element->visible) return;
-
-    echo '<li class="work-position">
-                <h5>'.$element->title.'</h5>
-                <p>'.$element->description.'</p>
-                <p>'.$element->getDurationAsString().'</p>
-                <strong>Achievements:</strong>
-                <ul>
-                    <li>Lorem ipsum dolor sit amet, 80% consectetuer adipiscing elit.</li>
-                    <li>Lorem ipsum dolor sit amet, 80% consectetuer adipiscing elit.</li>
-                    <li>Lorem ipsum dolor sit amet, 80% consectetuer adipiscing elit.</li>
-                </ul>
-              </li>';
 }
 
