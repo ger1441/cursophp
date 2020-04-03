@@ -145,6 +145,7 @@ if(!$route){
         $harmony = new Harmony($request, new Response());
         $harmony
             ->addMiddleware(new LaminasEmitterMiddleware(new SapiEmitter()))
+            ->addMiddleware(new \Franzl\Middleware\Whoops\WhoopsMiddleware())
             ->addMiddleware(new \App\Middlewares\AuthenticationMiddleware())
             ->addMiddleware(new AuraRouter($routerContainer))
             ->addMiddleware(new DispatcherMiddleware($container,'request-handler'))
