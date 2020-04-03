@@ -137,28 +137,12 @@ $route = $matcher->match($request);
 if(!$route){
     echo "No route";
 } else{
-    /*$handlerData = $route->handler;
-    $controllerName = $handlerData[0];
-    $actionName = $handlerData[1];
-    $needsAuth = $handlerData[2] ?? false;
-
-    $sessionUserId = $_SESSION['userId'] ?? null;
-    if($needsAuth && !$sessionUserId){
-        $controllerName = 'App\Controllers\AuthController';
-        $actionName = 'getLogout';
-    }else{
-        if($actionName == 'getLogin' && $sessionUserId){
-            $controllerName = 'App\Controllers\AdminController';
-            $actionName = 'getAdmin';
-        }
-    }*/
-
     $harmony = new Harmony($request, new Response());
     $harmony
         ->addMiddleware(new LaminasEmitterMiddleware(new SapiEmitter()))
+        ->addMiddleware(new \App\Middlewares\AuthenticationMiddleware())
         ->addMiddleware(new AuraRouter($routerContainer))
         ->addMiddleware(new DispatcherMiddleware($container,'request-handler'))
         ->run();
-
 }
 
