@@ -1,14 +1,16 @@
 <?php
 session_start();
 
-ini_set('display_errors',1);
-ini_set('display_startup_errors',1);
-error_reporting(E_ALL);
-
 require_once "../vendor/autoload.php";
 
 $dotenv = Dotenv\Dotenv::createImmutable(__DIR__.'/../');
 $dotenv->load();
+
+if(getenv('DEBUG') === 'true'){
+    ini_set('display_errors',1);
+    ini_set('display_startup_errors',1);
+    error_reporting(E_ALL);
+}
 
 use Aura\Router\RouterContainer;
 use Illuminate\Database\Capsule\Manager as Capsule;
@@ -18,6 +20,12 @@ use WoohooLabs\Harmony\Middleware\DispatcherMiddleware;
 use WoohooLabs\Harmony\Middleware\LaminasEmitterMiddleware;
 use Laminas\HttpHandlerRunner\Emitter\SapiEmitter;
 use Middlewares\AuraRouter;
+use Monolog\Logger;
+use Monolog\Handler\StreamHandler;
+
+// create a log channel
+$log = new Logger('app');
+$log->pushHandler(new StreamHandler(__DIR__ . '/../logs/app.log', Logger::WARNING));
 
 $container = new DI\Container(); //Inyector de Dependencias.
 $capsule = new Capsule;
@@ -143,19 +151,22 @@ if(!$route){
 
     try{
         $harmony = new Harmony($request, new Response());
-        $harmony
-            ->addMiddleware(new LaminasEmitterMiddleware(new SapiEmitter()))
-            ->addMiddleware(new \Franzl\Middleware\Whoops\WhoopsMiddleware())
-            ->addMiddleware(new \App\Middlewares\AuthenticationMiddleware())
+        $harmony->addMiddleware(new LaminasEmitterMiddleware(new SapiEmitter()));
+        if(getenv('DEBUG') === 'true'){
+            $harmony->addMiddleware(new \Franzl\Middleware\Whoops\WhoopsMiddleware());
+        }
+        $harmony->addMiddleware(new \App\Middlewares\AuthenticationMiddleware())
             ->addMiddleware(new AuraRouter($routerContainer))
             ->addMiddleware(new DispatcherMiddleware($container,'request-handler'))
             ->run();
     } catch (\Exception $e){
+        $log->warning('BAD REQUEST - ' . $e->getMessage());
         //return new Response\EmptyResponse(400); # De esta forma NO emite los encabezados
         $emitter = new SapiEmitter();
         //$emitter->emit(new Response\EmptyResponse(400));
         $emitter->emit(new Response\HtmlResponse($templateEngine->render('exceptions/400.twig')));
     } catch (\Error $e) {
+        $log->error('BAD RESPONSE '.$e->getMessage());
         $emitter = new SapiEmitter();
         //$emitter->emit(new Response\EmptyResponse(500));
         $emitter->emit(new Response\HtmlResponse($templateEngine->render('exceptions/500.twig')));
