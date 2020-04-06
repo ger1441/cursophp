@@ -82,7 +82,6 @@ $map->get('logout','/logout',[
 $map->get('admin','/admin',[
     'App\Controllers\AdminController',
     'getIndex',
-    true,
 ]);
 
 
@@ -90,7 +89,6 @@ $map->get('admin','/admin',[
 $map->get('addUsers','/users/add',[
     'App\Controllers\UsersController',
     'getAddUserAction',
-    true,
 ]);
 $map->post('saveUsers','/users/add',[
     'App\Controllers\UsersController',
@@ -101,7 +99,6 @@ $map->post('saveUsers','/users/add',[
 $map->get('addJobs','/jobs/add',[
     'App\Controllers\JobsController',
     'getAddJobAction',
-    true,
 ]);
 $map->post('saveJobs','/jobs/add',[
     'App\Controllers\JobsController',
@@ -110,19 +107,16 @@ $map->post('saveJobs','/jobs/add',[
 $map->get('indexJobs','/jobs',[
    'App\Controllers\JobsController',
    'indexAction',
-   true,
 ]);
 $map->get('deleteJobs','/jobs/delete',[
     'App\Controllers\JobsController',
     'deleteAction',
-    true,
 ]);
 
 /** PROJECTS */
 $map->get('addProjects','/projects/add',[
    'App\Controllers\ProjectsController',
     'getAddProjectAction',
-    true,
 ]);
 $map->post('saveProjects','/projects/add',[
     'App\Controllers\ProjectsController',
@@ -131,12 +125,20 @@ $map->post('saveProjects','/projects/add',[
 $map->get('indexProjects','/projects',[
     'App\Controllers\ProjectsController',
     'indexAction',
-    true,
 ]);
 $map->get('deleteProjects','/projects/delete',[
     'App\Controllers\ProjectsController',
     'deleteAction',
-    true,
+]);
+
+/** FORMULARIO DE CONTACTO */
+$map->get('contactForm','/contact',[
+    'App\Controllers\ContactController',
+    'index',
+]);
+$map->post('sendForm','/contact/send',[
+    'App\Controllers\ContactController',
+    'send',
 ]);
 
 $matcher = $routerContainer->getMatcher();
