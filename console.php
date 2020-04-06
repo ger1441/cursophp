@@ -30,5 +30,6 @@ $application = new Application();
 
 $application->add(new \App\Commands\HelloWorldCommand());
 $application->add(new \App\Commands\SendMailCommand());
+$application->add(new \App\Commands\CreateUserCommand());
 
 $application->run();

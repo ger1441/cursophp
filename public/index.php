@@ -94,6 +94,14 @@ $map->post('saveUsers','/users/add',[
     'App\Controllers\UsersController',
     'getAddUserAction'
 ]);
+$map->get('pass','/users/pass',[
+    'App\Controllers\UsersController',
+    'getFormChangePass',
+]);
+$map->post('changePass','/users/changepass',[
+    'App\Controllers\UsersController',
+    'postChangePass'
+]);
 
 /** JOBS */
 $map->get('addJobs','/jobs/add',[
